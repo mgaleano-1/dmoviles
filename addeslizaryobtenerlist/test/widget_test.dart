@@ -1,24 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:agregar_funcionalidad_deslizar_y_obtener_lista_de_todos/main.dart';
+// This is a basic Flutter widget test.
+//
+// To perform an interaction with a widget in your test, use the WidgetTester
+// utility in the flutter_test package. For example, you can send tap and scroll
+// gestures. You can also use WidgetTester to find child widgets in the widget
+// tree, read text, and verify that the values of widget properties are correct.
+
+
 
 void main() {
-  testWidgets('Verificar que la pantalla de inicio se carga y la lista de TODOs se muestra', (WidgetTester tester) async {
-    // Construir nuestra aplicación y activar un frame.
+  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
     await tester.pumpWidget(MyApp());
 
-    // Verificar que la pantalla de inicio muestra el texto 'Login'.
-    expect(find.text('Login'), findsOneWidget);
+    // Verify that our counter starts at 0.
+    expect(find.text('0'), findsOneWidget);
+    expect(find.text('1'), findsNothing);
 
-    // Completar el formulario de inicio de sesión.
-    await tester.enterText(find.byType(TextFormField).first, 'usuario');
-    await tester.enterText(find.byType(TextFormField).last, 'contraseña');
-    await tester.tap(find.text('Ingresar'));
-    await tester.pumpAndSettle(); // Esperar a que la navegación se complete.
+    // Tap the '+' icon and trigger a frame.
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pump();
 
-    // Verificar que la pantalla de inicio muestra la lista de TODOs.
-    expect(find.text('TODOs'), findsOneWidget);
-    expect(find.text('Comentarios'), findsOneWidget); // Verificar el botón deslizable de comentarios.
-    expect(find.text('Guardar'), findsOneWidget); // Verificar el botón deslizable de guardar.
+    // Verify that our counter has incremented.
+    expect(find.text('0'), findsNothing);
+    expect(find.text('1'), findsOneWidget);
   });
 }
